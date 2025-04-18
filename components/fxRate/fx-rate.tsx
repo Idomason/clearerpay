@@ -1,10 +1,9 @@
 "use client";
 
 import { ArrowRightLeft } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FxImage from "./fx-image";
 import { firstFxData, secondFxData } from "@/data/fxRate-data";
-import { cn } from "@/lib/utils";
 
 export default function FxRate() {
   const [isHovered, setIsHovered] = useState(false);
