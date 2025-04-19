@@ -11,12 +11,12 @@ export default function FxRate() {
 
   return (
     <div className="px-5 font-sans">
-      <div className="py-5 px-6 bg-white border-1 rounded-lg mx-auto w-full">
+      <div className="pt-5 px-6 bg-white border-1 rounded-lg mx-auto">
         <div className="flex items-center">
-          <h2 className="font-semibold text-primary mb-2">FX Rates</h2>
+          <h2 className="font-semibold text-primary mb-4">FX Rates</h2>
         </div>
         <div
-          className="relative overflow-hidden w-full h-[100px]"
+          className="relative overflow-hidden w-full h-[80px]"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >

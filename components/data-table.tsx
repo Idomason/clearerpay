@@ -50,7 +50,7 @@ export function DataTable() {
 
                 <div className="flex items-center space-x-1.5">
                   <span className="font-sans text-red-500 font-semibold">
-                    -N1, 000, 000
+                    - ₦1, 000, 000
                   </span>
                   <EllipsisVertical />
                 </div>

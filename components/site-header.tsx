@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRightLeft, Banknote, Gift, Wallet, Menu, X } from "lucide-react";
 import DashboardIcon from "./dashboard-icon";
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 const links = [
   {
@@ -42,6 +43,22 @@ const links = [
 export function SiteHeader() {
   const [active, setActive] = useState("/");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(
+    function () {
+      if (isMenuOpen) {
+        document.body.classList.add("no-scroll");
+      } else {
+        document.body.classList.remove("no-scroll");
+      }
+
+      // Clean up incase the component is unmounted
+      return () => {
+        document.body.classList.remove("no-scroll");
+      };
+    },
+    [isMenuOpen]
+  );
 
   return (
     <header className="relative h-(--header-height) flex shrink-0 items-center font-sans gap-2 py-2.5 border-b transition-[width,height] ease-linear">
@@ -85,8 +102,12 @@ export function SiteHeader() {
             </ul>
           </nav>
 
-          <div className="flex items-center space-x-4">
-            <div className="px-2.5 py-1.5 flex items-center space-x-2 bg-neutral-600 text-neutral-50 rounded-full">
+          <div className="flex items-center space-x-4 ">
+            <Button
+              size={"sm"}
+              variant="ghost"
+              className="px-2.5 py-1.5 flex items-center cursor-pointer space-x-2 bg-neutral-600 text-neutral-50 rounded-full"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -116,8 +137,12 @@ export function SiteHeader() {
                   d="m19.5 8.25-7.5 7.5-7.5-7.5"
                 />
               </svg>
-            </div>
-            <div className="text-xs lg:text-sm text-primary flex items-center space-x-1">
+            </Button>
+            <Button
+              size={"sm"}
+              variant={"ghost"}
+              className="text-xs lg:text-sm text-primary cursor-pointer flex items-center"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -138,7 +163,7 @@ export function SiteHeader() {
                 />
               </svg>
               <p>Settings</p>
-            </div>
+            </Button>
           </div>
         </div>
 
@@ -146,19 +171,20 @@ export function SiteHeader() {
         <div
           className={cn(
             "fixed inset-0 z-50 bg-white lg:hidden transition-transform duration-300 ease-in-out",
-            isMenuOpen ? "translate-x-0" : "translate-x-full"
+            isMenuOpen ? "translate-x-0 backdrop-blur-sm" : "translate-x-full"
           )}
         >
           <div className="flex flex-col h-full">
             <div className="flex items-center justify-between p-4 border-b">
               <h1 className="text-lg font-bold">Clearerpay</h1>
-              <button
+              <Button
                 onClick={() => setIsMenuOpen(false)}
+                variant={"ghost"}
                 className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
                 aria-label="Close menu"
               >
                 <X className="size-6" />
-              </button>
+              </Button>
             </div>
 
             <nav className="flex-1 overflow-y-auto p-4">
@@ -187,7 +213,11 @@ export function SiteHeader() {
             </nav>
 
             <div className="border-t p-4 space-y-4">
-              <div className="flex items-center space-x-2 p-2 bg-neutral-600 text-neutral-50 rounded-lg">
+              <Button
+                size={"sm"}
+                variant={"ghost"}
+                className="flex items-center cursor-pointer space-x-2 p-2 bg-neutral-600 text-neutral-50 rounded-lg"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -203,8 +233,12 @@ export function SiteHeader() {
                   />
                 </svg>
                 <span>Personal Account</span>
-              </div>
-              <button className="flex items-center space-x-2 w-full p-2 text-primary hover:bg-neutral-50 rounded-lg transition-colors">
+              </Button>
+              <Button
+                size={"sm"}
+                variant={"ghost"}
+                className="flex items-center cursor-pointer space-x-2 p-2 text-primary hover:bg-neutral-50 rounded-lg transition-colors"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -225,7 +259,7 @@ export function SiteHeader() {
                   />
                 </svg>
                 <span>Settings</span>
-              </button>
+              </Button>
             </div>
           </div>
         </div>
