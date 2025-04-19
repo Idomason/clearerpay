@@ -4,6 +4,7 @@ import { ArrowRightLeft } from "lucide-react";
 import { useState } from "react";
 import FxImage from "./fx-image";
 import { firstFxData, secondFxData } from "@/data/fxRate-data";
+import "./fx-rate.css";
 
 export default function FxRate() {
   const [isHovered, setIsHovered] = useState(false);
@@ -19,22 +20,10 @@ export default function FxRate() {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          <style jsx>{`
-            @keyframes slide {
-              0% {
-                transform: translateX(0);
-              }
-              100% {
-                transform: translateX(-50%);
-              }
-            }
-            .marquee {
-              animation: slide 20s linear infinite;
-              animation-play-state: ${isHovered ? "paused" : "running"};
-            }
-          `}</style>
           <div
-            className="marquee flex items-center gap-4 absolute top-0"
+            className={`marquee flex items-center gap-4 absolute top-0 ${
+              isHovered ? "marquee-paused" : ""
+            }`}
             style={{ width: "max-content" }}
           >
             {secondFxData.length > 0 ? (
