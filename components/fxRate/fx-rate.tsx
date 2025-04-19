@@ -28,28 +28,28 @@ export default function FxRate() {
           >
             {secondFxData.length > 0 ? (
               <>
-                {secondFxData.map((data) => (
+                {secondFxData.map((data, index) => (
                   <div
                     key={data.country}
                     className="flex-shrink-0 px-3 py-2 flex items-center justify-center space-x-2 rounded-lg bg-muted-foreground/15 min-w-[200px]"
                   >
-                    <FxImage first={firstFxData} second={secondFxData} />
+                    <FxImage
+                      first={[firstFxData[index % firstFxData.length]]}
+                      second={[data]}
+                    />
 
                     {firstFxData.length > 0 ? (
-                      firstFxData.map((data) => (
-                        <div
-                          key={data.country}
-                          className="flex flex-col justify-center text-xs sm:text-sm"
-                        >
-                          <p className="text-neutral-500/75 font-sans">
-                            {data.currency}
-                          </p>
-                          <strong>
-                            {data.symbol}
-                            {data.amount.toLocaleString()}
-                          </strong>
-                        </div>
-                      ))
+                      <div className="flex flex-col justify-center text-xs sm:text-sm">
+                        <p className="text-neutral-500/75 font-sans">
+                          {firstFxData[index % firstFxData.length].currency}
+                        </p>
+                        <strong>
+                          {firstFxData[index % firstFxData.length].symbol}
+                          {firstFxData[
+                            index % firstFxData.length
+                          ].amount.toLocaleString()}
+                        </strong>
+                      </div>
                     ) : (
                       <p>No data yet</p>
                     )}
@@ -67,28 +67,28 @@ export default function FxRate() {
                   </div>
                 ))}
                 {/* Duplicate items for seamless loop */}
-                {secondFxData.map((data) => (
+                {secondFxData.map((data, index) => (
                   <div
                     key={`duplicate-${data.country}`}
                     className="flex-shrink-0 px-3 py-2 flex items-center justify-center space-x-2 rounded-lg bg-muted-foreground/15 min-w-[200px]"
                   >
-                    <FxImage first={firstFxData} second={secondFxData} />
+                    <FxImage
+                      first={[firstFxData[index % firstFxData.length]]}
+                      second={[data]}
+                    />
 
                     {firstFxData.length > 0 ? (
-                      firstFxData.map((data) => (
-                        <div
-                          key={`duplicate-${data.country}`}
-                          className="flex flex-col justify-center text-xs sm:text-sm"
-                        >
-                          <p className="text-neutral-500/75 font-sans">
-                            {data.currency}
-                          </p>
-                          <strong>
-                            {data.symbol}
-                            {data.amount.toLocaleString()}
-                          </strong>
-                        </div>
-                      ))
+                      <div className="flex flex-col justify-center text-xs sm:text-sm">
+                        <p className="text-neutral-500/75 font-sans">
+                          {firstFxData[index % firstFxData.length].currency}
+                        </p>
+                        <strong>
+                          {firstFxData[index % firstFxData.length].symbol}
+                          {firstFxData[
+                            index % firstFxData.length
+                          ].amount.toLocaleString()}
+                        </strong>
+                      </div>
                     ) : (
                       <p>No data yet</p>
                     )}

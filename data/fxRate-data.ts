@@ -1,5 +1,3 @@
-import { symbol } from "zod";
-
 export const firstFxData = [
   {
     country: "Nigeria",

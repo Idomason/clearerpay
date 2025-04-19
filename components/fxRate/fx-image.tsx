@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 
 type fxData = {
   country: string;
@@ -9,46 +8,43 @@ type fxData = {
   symbol: string;
 }[];
 
-type fxDataProp = {
+type FxImageProps = {
   first: fxData;
   second: fxData;
 };
 
-export default function FxImage({ first, second }: fxDataProp) {
+export default function FxImage({ first, second }: FxImageProps) {
   return (
-    <div className="flex items-center justify-center -space-x-2">
-      <div className="h-6 w-6 rounded-full border-1 bg-foreground overflow-hidden">
-        {first.length > 0 ? (
-          first.map((firstFX) => (
-            <Image
-              key={firstFX.country}
-              className="w-full h-full object-cover"
-              src={firstFX.flag}
-              width={32}
-              height={32}
-              alt="Nigerian flag"
-            />
-          ))
-        ) : (
-          <p>No data yet</p>
-        )}
-      </div>
-      <div className="h-6 w-6 rounded-full border-1 bg-foreground overflow-hidden">
-        {second.length > 0 ? (
-          second.map((secondFX) => (
-            <Image
-              key={secondFX.country}
-              className="h-full w-full object-cover"
-              src={secondFX.flag}
-              width={32}
-              height={32}
-              alt="Nigerian flag"
-            />
-          ))
-        ) : (
-          <p>No data yet</p>
-        )}
-      </div>
+    <div className="flex items-center -space-x-2">
+      {/* First flag */}
+      {first.length > 0 ? (
+        <div className="h-8 w-8 overflow-hidden rounded-full">
+          <Image
+            className="h-full w-full object-cover"
+            src={first[0].flag}
+            width={32}
+            height={32}
+            alt={`${first[0].country} flag`}
+          />
+        </div>
+      ) : (
+        <div className="h-8 w-8 rounded-full bg-muted-foreground/10" />
+      )}
+
+      {/* Second flag */}
+      {second.length > 0 ? (
+        <div className="h-8 w-8 overflow-hidden rounded-full">
+          <Image
+            className="h-full w-full object-cover"
+            src={second[0].flag}
+            width={32}
+            height={32}
+            alt={`${second[0].country} flag`}
+          />
+        </div>
+      ) : (
+        <div className="h-8 w-8 rounded-full bg-muted-foreground/10" />
+      )}
     </div>
   );
 }
